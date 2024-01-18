@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "anyurlsession",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/thebrowsercompany/AnyURLSession",
+      "state" : {
+        "branch" : "71f2424",
+        "revision" : "71f2424744cc3d12815e35d7ec2475e3456b4a9f"
+      }
+    }
+  ],
+  "version" : 2
+}

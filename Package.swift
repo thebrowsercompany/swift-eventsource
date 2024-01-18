@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.6
 
 import PackageDescription
 
@@ -13,10 +13,15 @@ let package = Package(
     products: [
         .library(name: "LDSwiftEventSource", targets: ["LDSwiftEventSource"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/thebrowsercompany/AnyURLSession", revision: "71f2424")
+    ],
     targets: [
         .target(
             name: "LDSwiftEventSource",
+            dependencies: [
+                .product(name: "AnyURLSession", package: "AnyURLSession")
+            ],
             path: "Source"),
         .testTarget(
             name: "LDSwiftEventSourceTests",

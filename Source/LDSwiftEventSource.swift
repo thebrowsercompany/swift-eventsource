@@ -1,7 +1,12 @@
 import Foundation
 
 #if os(Linux) || os(Windows)
-import FoundationNetworking
+import AnyURLSession
+
+import class FoundationNetworking.HTTPURLResponse
+import struct FoundationNetworking.URLRequest
+import class FoundationNetworking.URLResponse
+import class FoundationNetworking.URLSessionConfiguration
 #endif
 
 /**
