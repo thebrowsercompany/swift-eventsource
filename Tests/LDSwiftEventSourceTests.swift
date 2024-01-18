@@ -3,6 +3,7 @@ import XCTest
 
 #if os(Linux) || os(Windows)
 import FoundationNetworking
+import AnyURLSession
 #endif
 
 final class LDSwiftEventSourceTests: XCTestCase {
@@ -103,6 +104,28 @@ final class LDSwiftEventSourceTests: XCTestCase {
     }
 
     func testCreatedSession() {
+        #if os(Linux) || os(Windows)
+        final class TestURLSessionGuts: URLSessionGuts {
+            var configuration: URLSessionConfiguration
+
+            init(configuration: URLSessionConfiguration, delegate: (any AnyURLSession.URLSessionDelegate)?, delegateQueue queue: OperationQueue?) {
+                self.configuration = configuration
+            }
+
+            func uploadTask(with request: URLRequest, fromFile file: URL, completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void) -> AnyURLSession.URLSessionUploadTask { AnyURLSession.URLSessionUploadTask() }
+            func dataTask(with request: URLRequest) -> AnyURLSession.URLSessionDataTask { AnyURLSession.URLSessionDataTask() }
+            func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void) -> AnyURLSession.URLSessionDataTask { AnyURLSession.URLSessionDataTask() }
+            func invalidateAndCancel() {}
+            func finishTasksAndInvalidate() {}
+        }
+
+        AnyURLSession.Dependencies.current.setValue(
+            Dependencies(gutsFactory: { (config, delegate, queue) in
+                TestURLSessionGuts(configuration: config, delegate: delegate, delegateQueue: queue)
+            })
+        )
+
+        #endif
         let config = EventSource.Config(handler: mockHandler, url: URL(string: "abc")!)
         let session = EventSourceDelegate(config: config).createSession()
         XCTAssertEqual(session.configuration.timeoutIntervalForRequest, config.idleTimeout)
