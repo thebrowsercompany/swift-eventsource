@@ -1,14 +1,16 @@
 {
-  "pins" : [
-    {
-      "identity" : "anyurlsession",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/thebrowsercompany/AnyURLSession",
-      "state" : {
-        "branch" : "71f2424",
-        "revision" : "71f2424744cc3d12815e35d7ec2475e3456b4a9f"
+  "object": {
+    "pins": [
+      {
+        "package": "swift-anyurlsession",
+        "repositoryURL": "https://github.com/thebrowsercompany/AnyURLSession",
+        "state": {
+          "branch": "2542851",
+          "revision": "25428518a4bdc044c20bef370225a83b745f6426",
+          "version": null
+        }
       }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }
