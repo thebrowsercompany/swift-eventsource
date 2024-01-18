@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "LDSwiftEventSource", targets: ["LDSwiftEventSource"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/thebrowsercompany/AnyURLSession", revision: "2542851")
+        .package(url: "https://github.com/thebrowsercompany/AnyURLSession", revision: "9b8e39b")
     ],
     targets: [
         .target(
