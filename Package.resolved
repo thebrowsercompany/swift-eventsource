@@ -5,8 +5,8 @@
         "package": "swift-anyurlsession",
         "repositoryURL": "https://github.com/thebrowsercompany/AnyURLSession",
         "state": {
-          "branch": "9b8e39b",
-          "revision": "9b8e39b95f8290909b976619eb00dc8c9ba472bf",
+          "branch": "main",
+          "revision": "bb5bf3bbee5a98ea6c38b89c66a04812f904f958",
           "version": null
         }
       }
