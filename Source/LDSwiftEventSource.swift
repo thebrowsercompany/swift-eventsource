@@ -161,11 +161,7 @@ class EventSourceDelegate: NSObject, URLSessionDataDelegate {
 
     private let config: EventSource.Config
 
-    private var readyState: ReadyState = .raw {
-        didSet {
-            logger.log(.debug, "State: %@ -> %@", oldValue.rawValue, readyState.rawValue)
-        }
-    }
+    private var readyState: ReadyState = .raw
 
     private let utf8LineParser: UTF8LineParser = UTF8LineParser()
     private let eventParser: EventParser
@@ -234,7 +230,6 @@ class EventSourceDelegate: NSObject, URLSessionDataDelegate {
     }
 
     private func connect() {
-        logger.log(.info, "Starting EventSource client")
         let task = urlSession?.dataTask(with: createRequest())
         task?.resume()
         sessionTask = task
@@ -293,8 +288,6 @@ class EventSourceDelegate: NSObject, URLSessionDataDelegate {
                            dataTask: URLSessionDataTask,
                            didReceive response: URLResponse,
                            completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        logger.log(.debug, "Initial reply received")
-
         guard readyState != .shutdown
         else {
             completionHandler(.cancel)
