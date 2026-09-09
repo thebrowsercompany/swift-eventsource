@@ -67,7 +67,7 @@ jobs:
           fetch-depth: 0 # If you only need the current version keep this.
 
       - name: Build and test
-        run: swift test --enable-test-discovery
+        run: swift test --enable-test-discovery --disable-automatic-resolution
 
   windows-build:
     name: Windows - Swift 5.9
@@ -80,4 +80,4 @@ jobs:
           branch: swift-5.9-release
           tag: 5.9-RELEASE
       - name: Build and test
-        run: swift test
+        run: swift test --disable-automatic-resolution
