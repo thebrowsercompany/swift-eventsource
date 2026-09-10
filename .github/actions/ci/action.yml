@@ -46,7 +46,9 @@ runs:
 
     - name: Build & Test on iOS Simulator
       shell: bash
-      run: xcodebuild test -disableAutomaticPackageResolution -scheme 'LDSwiftEventSource' -sdk iphonesimulator -destination '${{ inputs.ios-sim }}' CODE_SIGN_IDENTITY= | xcpretty
+      env:
+        IOS_SIM: ${{ inputs.ios-sim }}
+      run: xcodebuild test -disableAutomaticPackageResolution -scheme 'LDSwiftEventSource' -sdk iphonesimulator -destination "$IOS_SIM" CODE_SIGN_IDENTITY= | xcpretty
 
     - name: Build Tests for tvOS device
       shell: bash
