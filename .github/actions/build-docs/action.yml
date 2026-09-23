@@ -6,7 +6,9 @@ runs:
   steps:
     - name: Install jazzy gem
       shell: bash
-      run: gem install jazzy
+      run: |
+        gem install mustache -v 1.1.2 --no-document
+        gem install jazzy -v 0.15.4 --conservative --no-document
 
     - name: Build Documentation
       shell: bash
