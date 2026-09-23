@@ -68,14 +68,14 @@ jobs:
           swift test --enable-test-discovery --disable-automatic-resolution
 
   windows-build:
-    name: Windows - Swift 5.9
+    name: Windows - Swift 6.4.0
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Swift
         uses: compnerd/gha-setup-swift@cd348eb89f2f450b0664c07fb1cb66880addf17d
         with:
-          branch: swift-5.9-release
-          tag: 5.9-RELEASE
+          branch: swift-6.4.0-release
+          tag: 6.4.0-RELEASE
       - name: Build and test
         run: swift test --disable-automatic-resolution
