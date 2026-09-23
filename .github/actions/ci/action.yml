@@ -20,9 +20,7 @@ runs:
 
     - name: Install mint
       shell: bash
-      run: |
-        brew tap mint-lang/mint-lang
-        brew install mint-lang
+      run: brew install mint
 
     - name: Install cocoapods
       shell: bash
