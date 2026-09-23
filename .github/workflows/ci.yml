@@ -73,9 +73,9 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Swift
-        uses: compnerd/gha-setup-swift@cd348eb89f2f450b0664c07fb1cb66880addf17d
+        uses: compnerd/gha-setup-swift@bbae8ce86bac5a3449f3992b3d88bc4ca25f2057 # v0.5.0
         with:
-          branch: swift-6.4.0-release
-          tag: 6.4.0-RELEASE
+          swift-version: swift-6.4.0-release
+          swift-build: 6.4.0-RELEASE
       - name: Build and test
         run: swift test --disable-automatic-resolution
