@@ -20,8 +20,8 @@ start-contract-test-service-bg:
 	make start-contract-test-service >$(TEMP_TEST_OUTPUT) 2>&1 &
 
 run-contract-tests:
-	curl -s https://raw.githubusercontent.com/launchdarkly/sse-contract-tests/main/downloader/run.sh \
-		| VERSION=v2 PARAMS="-url http://localhost:8000 -debug -stop-service-at-end -skip 'basic parsing/large message in one chunk' -skip 'basic parsing/large message in two chunks'" sh
+	curl -fsSL -o /tmp/sse-contract-tests-run.sh https://raw.githubusercontent.com/launchdarkly/sse-contract-tests/f76cb45d7cc7737d32d061f6e5995eef6fe8b964/downloader/run.sh
+	VERSION=v2.32.0 PARAMS="-url http://localhost:8000 -debug -stop-service-at-end -skip 'basic parsing/large message in one chunk' -skip 'basic parsing/large message in two chunks'" sh /tmp/sse-contract-tests-run.sh
 
 contract-tests: build-contract-tests start-contract-test-service-bg run-contract-tests
 
