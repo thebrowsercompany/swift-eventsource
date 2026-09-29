@@ -1,5 +1,9 @@
 import Foundation
 
+#if !os(Linux) && !os(Windows)
+import os.log
+#endif
+
 #if os(Linux) || os(Windows)
 import AnyURLSession
 
@@ -62,6 +66,10 @@ public class EventSource {
         public var headers: [String: String] = [:]
         /// Transform function to allow dynamically configuring the headers on each API request.
         public var headerTransform: HeaderTransform = { $0 }
+#if !os(Linux) && !os(Windows)
+        /// The logger used for EventSource messages.
+        public var logger: OSLog = OSLog(subsystem: "com.launchdarkly.swift-eventsource", category: "LDEventSource")
+#endif
         /// The minimum amount of time to wait before reconnecting after a failure
         public var reconnectTime: TimeInterval = 1.0
         /// The maximum amount of time to wait before reconnecting after a failure
@@ -157,7 +165,7 @@ class ReconnectionTimer {
 // MARK: EventSourceDelegate
 class EventSourceDelegate: NSObject, URLSessionDataDelegate {
     private let delegateQueue: DispatchQueue = DispatchQueue(label: "ESDelegateQueue")
-    private let logger = Logs()
+    private let logger: Logs
 
     private let config: EventSource.Config
 
@@ -171,6 +179,11 @@ class EventSourceDelegate: NSObject, URLSessionDataDelegate {
 
     init(config: EventSource.Config) {
         self.config = config
+#if !os(Linux) && !os(Windows)
+        self.logger = Logs(logger: config.logger)
+#else
+        self.logger = Logs()
+#endif
         self.eventParser = EventParser(handler: config.handler,
                                        initialEventId: config.lastEventId,
                                        initialRetry: config.reconnectTime)

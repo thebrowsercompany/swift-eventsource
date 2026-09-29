@@ -18,7 +18,11 @@ class Logs {
     }
 
 #if !os(Linux) && !os(Windows)
-    private let logger: OSLog = OSLog(subsystem: "com.launchdarkly.swift-eventsource", category: "LDEventSource")
+    private let logger: OSLog
+
+    init(logger: OSLog) {
+        self.logger = logger
+    }
 
     func log(_ level: Level, _ staticMsg: StaticString) {
         os_log(staticMsg, log: logger, type: level.osLogType)
@@ -32,6 +36,8 @@ class Logs {
         os_log(staticMsg, log: logger, type: level.osLogType, arg1, arg2)
     }
 #else
+    init() {}
+
     // We use Any over CVarArg here, because on Linux prior to Swift 5.4 String does not conform to CVarArg
     func log(_ level: Level, _ staticMsg: StaticString, _ args: Any...) { }
 #endif
