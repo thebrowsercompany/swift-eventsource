@@ -117,6 +117,7 @@ final class LDSwiftEventSourceTests: XCTestCase {
             func dataTask(with request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, (any Error)?) -> Void) -> AnyURLSession.URLSessionDataTask { AnyURLSession.URLSessionDataTask() }
             func invalidateAndCancel() {}
             func finishTasksAndInvalidate() {}
+            func updateInternalSession(_ session: AnyURLSession.URLSession) {}
         }
 
         AnyURLSession.Dependencies.current.setValue(
